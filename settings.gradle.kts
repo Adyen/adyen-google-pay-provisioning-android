@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ExampleApp"
-include(":app")
+rootProject.name = "AdyenGoogleWalletProvisioningExampleApp"
+include(":exampleapp")
  
