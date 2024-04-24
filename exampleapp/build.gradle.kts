@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.adyen.issuing.mobile.exampleapp"
+    namespace = "com.adyen.issuing.mobile.provisioning.exampleapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.adyen.issuing.mobile.exampleapp"
+        applicationId = "com.adyen.issuing.mobile.provisioning.exampleapp"
         minSdk = 26
         targetSdk = 34
         versionCode = 1

@@ -1,4 +1,4 @@
-package com.adyen.issuing.mobile.exampleapp.ui.theme
+package com.adyen.issuing.mobile.provisioning.exampleapp.ui.theme
 
 import android.app.Activity
 import android.os.Build

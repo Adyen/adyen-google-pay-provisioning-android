@@ -1,4 +1,4 @@
-package com.adyen.issuing.mobile.exampleapp
+package com.adyen.issuing.mobile.provisioning.exampleapp
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.adyen.issuing.mobile.exampleapp.ui.theme.ExampleAppTheme
+import com.adyen.issuing.mobile.provisioning.exampleapp.ui.theme.ExampleAppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

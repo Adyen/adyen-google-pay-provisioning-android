@@ -1,4 +1,4 @@
-package com.adyen.issuing.mobile.exampleapp.ui.theme
+package com.adyen.issuing.mobile.provisioning.exampleapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
