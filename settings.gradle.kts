@@ -16,9 +16,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        mavenLocal()
     }
 }
 
 rootProject.name = "AdyenGoogleWalletProvisioningExampleApp"
-include(":exampleapp")
+include(":example")
  
