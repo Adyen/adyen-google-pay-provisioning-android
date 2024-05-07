@@ -4,6 +4,9 @@ import com.adyen.issuing.mobile.provisioning.exampleapp.backend.Backend
 import com.adyen.issuing.mobile.provisioning.exampleapp.data.CardActivationResult
 import com.adyen.issuing.mobile.provisioning.exampleapp.data.OpaqueCardDataResponse
 
+/**
+ * Mock backend implementation.
+ */
 class MockBackend : Backend {
 
     /**

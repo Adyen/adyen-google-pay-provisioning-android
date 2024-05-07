@@ -18,6 +18,7 @@ import com.adyen.issuing.mobile.provisioning.exampleapp.viewmodel.MainViewModelF
 
 class MainActivity : ComponentActivity() {
 
+    // Create the MainViewModel and pass in the Activity provider.
     private val viewModel: MainViewModel by viewModels {
         MainViewModelFactory { this }
     }
@@ -41,6 +42,10 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    /**
+     * Forward `onActivityResult()` calls to the ViewModel so they can be passed to the
+     * provisioning SDK.
+     */
     @Suppress("DEPRECATION")
     @Deprecated("")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

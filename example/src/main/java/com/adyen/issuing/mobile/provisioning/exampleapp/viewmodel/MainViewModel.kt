@@ -34,16 +34,19 @@ class MainViewModel(
     private val mutableCardState = MutableStateFlow<CardState>(CardState.Loading)
     val cardState: StateFlow<CardState> = mutableCardState.asStateFlow()
 
-    private val mutableErrorEventChannel = Channel<String>()
-
     init {
         fetchState()
     }
 
+    /**
+     * Fetch the card activation data from the backend and initialize the provisioning SDK with it
+     */
     private fun fetchState() {
         viewModelScope.launch {
+            // Fetch activation data from the backend for the given payment instrument ID.
             val cardState = backend.requestCardActivation(paymentInstrumentId).let { cardActivationResult ->
                 when (cardActivationResult) {
+                    // Use the activation data to initialize the provisioning SDK.
                     is CardActivationResult.Active -> CardProvisioning.create(
                         cardActivationResult.sdkInput, activityProvider
                     ).let { provisioningCreateResult ->
@@ -53,7 +56,7 @@ class MainViewModel(
                                 getCardState()
                             }
                             is CardProvisioningCreateResult.Failed.GooglePayNotSupported -> CardState.NotSupported
-                            is CardProvisioningCreateResult.Failed.InvalidSdkInput -> CardState.Error(message = "Invalid SDK Input")
+                            is CardProvisioningCreateResult.Failed.InvalidSdkInput -> CardState.Error(message = "Activation data is invalid")
                         }
                     }
                     CardActivationResult.Disabled -> CardState.Disabled
@@ -66,9 +69,13 @@ class MainViewModel(
     private suspend fun getCardState(): CardState =
         cardProvisioning?.canProvision()?.let {
             when (it) {
+                // Card can be provisioned.
                 is CanProvisionResult.CanBeProvisioned -> CardState.NotAddedToWallet
+                // Card has already been added to the wallet.
                 is CanProvisionResult.CannotBeProvisioned.AlreadyExistsInWallet -> CardState.AddedToWallet
+                // The Google Tap and Pay API returned an error.
                 is CanProvisionResult.CannotBeProvisioned.Error -> CardState.Error(message = it.throwable.message)
+                // Something unexpected happened!
                 is CanProvisionResult.CannotBeProvisioned.UnknownFailure -> CardState.Error(message = "Unknown failure")
             }
 
@@ -79,14 +86,17 @@ class MainViewModel(
         cardAddress: CardAddress = CardAddress()
     ) {
             viewModelScope.launch {
+                // Request the SDK Output value from the provisioning SDK.
                 cardProvisioning?.getSdkOutput()?.let {
                     val state = when (it) {
-                        is GetSdkOutputResult.Failure -> CardState.Error("Failed to get sdk output data")
+                        is GetSdkOutputResult.Failure -> CardState.Error("Failed to get SDK Output value")
+                        // Use the SDK Output value to request the Opaque Payment Card data.
                         is GetSdkOutputResult.Success -> {
                             val opcResponse = backend.requestOpaquePaymentCardData(
                                 paymentInstrumentId,
                                 it.sdkOutput
                             )
+                            // Use the Opaque Payment Card data to provision the card.
                             cardProvisioning?.provision(
                                 opcResponse.sdkInput,
                                 cardholderName,
