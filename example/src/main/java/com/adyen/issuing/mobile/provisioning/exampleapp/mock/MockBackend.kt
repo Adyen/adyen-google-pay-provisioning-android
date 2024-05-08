@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2024 Adyen N.V.
+ *
+ * This file is open source and available under the MIT license. See the LICENSE file for more info.
+ *
+ * Created by davidw on 8/5/2024.
+ */
+
 package com.adyen.issuing.mobile.provisioning.exampleapp.mock
 
 import com.adyen.issuing.mobile.provisioning.exampleapp.backend.Backend
@@ -13,7 +21,7 @@ class MockBackend : Backend {
      * Request card activation data (`sdkInput`) by making a **GET** request to
      * `paymentInstruments/$[paymentInstrumentId]/networkTokenActivationData` endpoint.
      */
-    override fun requestCardActivation(paymentInstrumentId: String): CardActivationResult =
+    override suspend fun requestCardActivation(paymentInstrumentId: String): CardActivationResult =
         CardActivationResult.Active(dummySdkInput)
 
     /**
@@ -21,7 +29,7 @@ class MockBackend : Backend {
      * `paymentInstruments/$[paymentInstrumentId]/networkTokenActivationData` endpoint and passing
      * [sdkOutput] in the body.
      */
-    override fun requestOpaquePaymentCardData(
+    override suspend fun requestOpaquePaymentCardData(
         paymentInstrumentId: String,
         sdkOutput: String
     ): OpaqueCardDataResponse =

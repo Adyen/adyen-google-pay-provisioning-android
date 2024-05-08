@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2024 Adyen N.V.
+ *
+ * This file is open source and available under the MIT license. See the LICENSE file for more info.
+ *
+ * Created by davidw on 8/5/2024.
+ */
+
 package com.adyen.issuing.mobile.provisioning.exampleapp.ui
 
 import androidx.annotation.StringRes
@@ -88,9 +96,6 @@ private fun ColumnScope.CardDetails(modifier: Modifier, lastFour: String) {
         )
         Text(
             text = stringResource(R.string.account, lastFour)
-        )
-        Text(
-            text = "Balance €123.00"
         )
     }
 }
