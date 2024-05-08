@@ -22,3 +22,8 @@ The Google Push Provisioning API is not available publicly but can be provided b
 Once you have the API, the dependency must be made available to your development environment. This can be done via Maven Local by adding the files under your `~/.m2` directory or they can be hosted in an internal Maven repository if you have one. 
 
 The files should not be stored in such a way that they are made publicly available.
+
+### Whitelisting your App Package name
+
+The package name of any Android app which accesses the Google Tap and Pay API must be whitelisted with Google. For additional security, app fingerprints
+(SHA-256) can also be whitelisted. Please provide any required package names and fingerprints to your Adyen account manager so they can be whitelisted. 
